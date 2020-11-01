@@ -1,0 +1,107 @@
+pa_autoconfigure_django.py --python=3.6 https://github.com/sofiamedf/my-first-blog.git                                                         
+
+< Running API sanity checks >
+   \
+    ~<:>>>>>>>>>
+Cloning into '/home/sofiamedf/sofiamedf.pythonanywhere.com'...
+remote: Enumerating objects: 22, done.
+remote: Counting objects: 100% (22/22), done.
+remote: Compressing objects: 100% (20/20), done.
+remote: Total 22 (delta 3), reused 16 (delta 0), pack-reused 0
+Unpacking objects: 100% (22/22), done.
+Checking connectivity... done.
+
+< Creating virtualenv with Python3.6 >
+   \
+    ~<:>>>>>>>>>
+Running virtualenv with interpreter /usr/bin/python3.6
+Already using interpreter /usr/bin/python3.6
+Using base prefix '/usr'
+New python executable in /home/sofiamedf/.virtualenvs/sofiamedf.pythonanywhere.com/bin/python3.6
+Also creating executable in /home/sofiamedf/.virtualenvs/sofiamedf.pythonanywhere.com/bin/python
+Installing setuptools, pip, wheel...
+done.
+virtualenvwrapper.user_scripts creating /home/sofiamedf/.virtualenvs/sofiamedf.pythonanywhere.com/bin/predeactivate
+virtualenvwrapper.user_scripts creating /home/sofiamedf/.virtualenvs/sofiamedf.pythonanywhere.com/bin/postdeactivate
+virtualenvwrapper.user_scripts creating /home/sofiamedf/.virtualenvs/sofiamedf.pythonanywhere.com/bin/preactivate
+virtualenvwrapper.user_scripts creating /home/sofiamedf/.virtualenvs/sofiamedf.pythonanywhere.com/bin/postactivate
+virtualenvwrapper.user_scripts creating /home/sofiamedf/.virtualenvs/sofiamedf.pythonanywhere.com/bin/get_env_details
+
+  ___________________________________________________________________
+/                                                                     \
+| Pip installing -r                                                   |
+| /home/sofiamedf/sofiamedf.pythonanywhere.com/requirements.txt (this |
+| may take a couple of minutes)                                       |
+\                                                                     /
+  -------------------------------------------------------------------
+   \
+    ~<:>>>>>>>>>
+Looking in links: /usr/share/pip-wheels
+Collecting Django~=2.2.4
+  Downloading Django-2.2.16-py3-none-any.whl (7.5 MB)
+     |████████████████████████████████| 7.5 MB 15.5 MB/s 
+Collecting pytz
+  Downloading pytz-2020.1-py2.py3-none-any.whl (510 kB)
+     |████████████████████████████████| 510 kB 18.5 MB/s 
+Collecting sqlparse>=0.2.2
+  Downloading sqlparse-0.4.1-py3-none-any.whl (42 kB)
+     |████████████████████████████████| 42 kB 186 kB/s 
+Installing collected packages: pytz, sqlparse, Django
+Successfully installed Django-2.2.16 pytz-2020.1 sqlparse-0.4.1
+
+< Creating web app via API >
+   \
+    ~<:>>>>>>>>>
+
+< Adding static files mappings for /static/ and /media/ >
+   \
+    ~<:>>>>>>>>>
+
+< Updating wsgi file at /var/www/sofiamedf_pythonanywhere_com_wsgi.py >
+   \
+    ~<:>>>>>>>>>
+
+< Updating settings.py >
+   \
+    ~<:>>>>>>>>>
+
+< Running collectstatic >
+   \
+    ~<:>>>>>>>>>
+Traceback (most recent call last):
+  File "/home/sofiamedf/.virtualenvs/sofiamedf.pythonanywhere.com/lib/python3.6/site-packages/django/core/management/__init__.py", line 204, in fetch_com
+mand
+    app_name = commands[subcommand]
+KeyError: 'collectstatic'
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "/home/sofiamedf/sofiamedf.pythonanywhere.com/manage.py", line 21, in <module>
+    main()
+  File "/home/sofiamedf/sofiamedf.pythonanywhere.com/manage.py", line 17, in main
+    execute_from_command_line(sys.argv)
+  File "/home/sofiamedf/.virtualenvs/sofiamedf.pythonanywhere.com/lib/python3.6/site-packages/django/core/management/__init__.py", line 381, in execute_f
+rom_command_line
+    utility.execute()
+  File "/home/sofiamedf/.virtualenvs/sofiamedf.pythonanywhere.com/lib/python3.6/site-packages/django/core/management/__init__.py", line 375, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/sofiamedf/.virtualenvs/sofiamedf.pythonanywhere.com/lib/python3.6/site-packages/django/core/management/__init__.py", line 211, in fetch_com
+mand
+    settings.INSTALLED_APPS
+  File "/home/sofiamedf/.virtualenvs/sofiamedf.pythonanywhere.com/lib/python3.6/site-packages/django/conf/__init__.py", line 79, in __getattr__
+    self._setup(name)
+  File "/home/sofiamedf/.virtualenvs/sofiamedf.pythonanywhere.com/lib/python3.6/site-packages/django/conf/__init__.py", line 66, in _setup
+    self._wrapped = Settings(settings_module)
+  File "/home/sofiamedf/.virtualenvs/sofiamedf.pythonanywhere.com/lib/python3.6/site-packages/django/conf/__init__.py", line 176, in __init__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+Traceback (most recent call last):
+  File "/home/sofiamedf/.local/bin/pa_autoconfigure_django.py", line 47, in <module>
+    main(arguments['<git-repo-url>'], arguments['--domain'], arguments['--python'], nuke=arguments.get('--nuke'))
+  File "/home/sofiamedf/.local/bin/pa_autoconfigure_django.py", line 37, in main
+    project.run_collectstatic()
+  File "/home/sofiamedf/.local/lib/python3.6/site-packages/pythonanywhere/django_project.py", line 87, in run_collectstatic
+    '--noinput',
+  File "/usr/lib/python3.6/subprocess.py", line 311, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command '['/home/sofiamedf/.virtualenvs/sofiamedf.pythonanywhere.com/bin/python', '/home/sofiamedf/sofiamedf.pythonanywher
+e.com/manage.py', 'collectstatic', '--noinput']' returned non-zero exit status 1.
