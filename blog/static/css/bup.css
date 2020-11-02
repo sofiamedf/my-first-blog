@@ -3,9 +3,8 @@ h1 a, h2 a {
     font-family: 'Open Sans', sans-serif;
 }
 body {
-	width: 650px;
-	margin: 0 auto;
-	margin-bottom: 150px;
+	padding-left: 300px;
+	padding-right: 400px;
 }
 .page-header {
     padding: 20px 20px 20px 40px;
@@ -52,8 +51,7 @@ h1, h2, h3, h4 {
 }
 
 .post {
-    margin-bottom: 40px;
-    margin-right: 150px;
+    margin-bottom: 50px;
 }
 
 .post h2 a, .post h2 a:visited {
