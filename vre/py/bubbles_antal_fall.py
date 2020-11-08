@@ -4,7 +4,7 @@ import plotly
 import plotly.express as px
 
 # data
-#df = pd.read_csv("antalfall.csv")
+# df = pd.read_csv("antalfall.csv")
 df = pd.DataFrame({"2019":["6","3","2","2","6","0","5","2","0","1","20","99","2","32","2","6","0","0","25","14","5"],
 			"2018":["2","1","0","2","5","6","4","2","2","2","24","146","44","13","5","95","3","4","45","39","0"],
 			"2017":["2","2","1","4","19","0","2","0","7","0","17","93","0","7","21","0","0","14","30","23","2"],
@@ -22,9 +22,9 @@ df = pd.DataFrame({"2019":["6","3","2","2","6","0","5","2","0","1","20","99","2"
 fig = px.scatter(df,  x="Regioner", y=["2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010"], title="Antal fall av VRE")
 
 # show figure
-fig.show()
+# fig.show()
 
 # make html file
-plotly.offline.plot(fig, filename='html/static_vre.html')
+plotly.offline.plot(fig, filename='../html/static_vre.html', auto_open=False)
 
 # gör om från csv/excel

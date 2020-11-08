@@ -6,7 +6,7 @@ import plotly.express as px
 # fall per åldersgrupp i sverige 2010-2019
 
 # data frame xlsx
-df = pd.read_excel("data/alles_vre.xlsx")
+df = pd.read_excel("../data/alles_vre.xlsx")
 # print(df.head())
 
 # plotly express scatter plot
@@ -26,10 +26,10 @@ fig.update_xaxes(title_text="Year")
 fig.update_yaxes(title_text="Nr of cases")
 
 # show figure
-fig.show()
+# fig.show()
 
 # make html file
-# plotly.offline.plot(fig, filename='html/age_grps_dots.html')
+plotly.offline.plot(fig, filename='../html/age_grps_dots.html', auto_open=False)
 
 # bra att ha-saker:
 # from IPython.display import display

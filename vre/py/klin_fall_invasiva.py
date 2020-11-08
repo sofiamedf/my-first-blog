@@ -7,7 +7,7 @@ import plotly.express as px
 # skulle kunna lägga till sår & urin kanske nåt mer? - inte jättebra idé - ofullständiga data!
 
 # data frame xlsx
-df = pd.read_excel("data/alles_vre.xlsx")
+df = pd.read_excel("../data/alles_vre.xlsx")
 # print(df.head())
 
 # plotly express scatter plot
@@ -27,10 +27,10 @@ fig.update_xaxes(title_text="Year")
 fig.update_yaxes(title_text="Nr of cases")
 
 # show figure
-fig.show()
+# fig.show()
 
 # make html file
-plotly.offline.plot(fig, filename='html/klin_fall_invasiva.html')
+plotly.offline.plot(fig, filename='../html/klin_fall_invasiva.html', auto_open=False)
 
 # bra att ha-saker:
 # from IPython.display import display

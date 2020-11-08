@@ -27,10 +27,10 @@ fig.update_xaxes(title_text="Year")
 fig.update_yaxes(title_text="No. of cases")
 
 # show figure
-fig.show()
+# fig.show()
 
 # make html file
-plotly.offline.plot(fig, filename='../html/sve_fall_van.html')
+plotly.offline.plot(fig, filename='../html/sve_fall_van.html', auto_open=False)
 
 # bra att ha-saker:
 # from IPython.display import display

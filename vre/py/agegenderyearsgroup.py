@@ -16,10 +16,10 @@ fig = px.bar(df, x="Year", y="Percent", color="Gender", title="Könsfördelning 
 fig.update_layout(barmode='group')
 
 # show figure
-fig.show()
+# fig.show()
 
 # make html file
-plotly.offline.plot(fig, filename='gender_gr_vre.html')
+plotly.offline.plot(fig, filename='../html/gender_gr_vre.html', auto_open=False)
 
 
 

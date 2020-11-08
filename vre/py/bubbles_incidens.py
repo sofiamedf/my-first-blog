@@ -4,7 +4,7 @@ import plotly
 import plotly.express as px
 
 # data
-#df = pd.read_csv("antalfall.csv")
+# df = pd.read_csv("antalfall.csv")
 df = pd.DataFrame({"2019":["3.75","1.04","3.35","0.69","1.79","0","1.37","0.81","0","0.39","1.45","4.16","0.67","8.33","0.7","2.2","0","0","1.44","4.59","1.07"],
 			"2018":["1.25","0.34","0","0.69","1.51","4.6","1.1","0.81","1","0.79","1.76","6.22","14.93","3.45","1.77","35.16","1.22","1.46","2.63","12.9","0"],
 			"2017":["1.25","0.69","1.7","1.4","5.84","0","0.55","0","3.54","0","1.26","4.02","0","1.89","7.48","0","0","5.16","1.77","7.69","0.43"],
@@ -22,10 +22,10 @@ df = pd.DataFrame({"2019":["3.75","1.04","3.35","0.69","1.79","0","1.37","0.81",
 fig = px.scatter(df,  x="Regioner", y=["2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010"], title="Incidens av VRE")
 
 # show figure
-fig.show()
+# fig.show()
 
 # make html file
-plotly.offline.plot(fig, filename='static_vre_incidens.html')
+plotly.offline.plot(fig, filename='../html/static_vre_incidens.html', auto_open=False)
 
 # gör om från csv/excel
 

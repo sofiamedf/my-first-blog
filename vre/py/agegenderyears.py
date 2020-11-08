@@ -13,10 +13,10 @@ df = pd.DataFrame({"Percent":["33.3","50.0","63.1","46.8","28.5","48.5","45.8","
 fig = px.bar(df, x="Year", y="Percent", color="Gender", title="Könsfördelning VRE-fall i %")
 
 # show figure
-fig.show()
+# fig.show()
 
 # make html file
-plotly.offline.plot(fig, filename='gender_vre.html')
+plotly.offline.plot(fig, filename='../html/gender_vre.html', auto_open=False)
 
 
 

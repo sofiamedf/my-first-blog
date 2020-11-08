@@ -28,10 +28,10 @@ fig.layout.updatemenus[0].buttons[0].args[1]["transition"]["duration"] = 3000
 fig.layout.plot_bgcolor = "#FFFFFF"
 
 # show figure
-fig.show()
+# fig.show()
 
 # make html file
-plotly.offline.plot(fig, filename='html/anime_vre_incidens.html')
+plotly.offline.plot(fig, filename='../html/anime_vre_incidens.html', auto_open=False)
 
 
 ## ANDRAS RADER ##################

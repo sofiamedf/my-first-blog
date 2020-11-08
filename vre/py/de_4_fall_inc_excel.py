@@ -3,6 +3,7 @@ import pandas as pd
 import plotly
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+import psutil
 
 # data frame xlsx
 df = pd.read_excel("../data/alles_vre.xlsx")
@@ -102,10 +103,10 @@ fig.update_layout(
 )
 
 # show figure
-fig.show()
+# fig.show()
 
 # make other files
-plotly.offline.plot(fig, filename="../html/vre_cases_inc_4_static.html")
+plotly.offline.plot(fig, filename="../html/vre_cases_inc_4_static.html", auto_open=False)
 fig.write_image("../images/vre_cases_inc_4_static.png")
 
 # bra att ha-saker:
