@@ -1,0 +1,374 @@
+Vill du göra succé på nästa APT genom att smälla upp en presentation i Hans Rosling-klass?
+
+<center><iframe src="https://giphy.com/embed/GrBBdaccaEDoInWBmI" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></center>
+
+<i>"Show don't tell"</i> brukar man ju säga. Jag ska visa vad man kan göra.
+
+<center><iframe src="https://giphy.com/embed/4sEd58eaRwM1qtkOWb" width="480" height="260" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></center>
+
+Instruktionerna är i första hand skrivna för Mac-användare men instruktioner till Windowsanvändare är på gång. Det är framförallt i installationsmomenten det finns betydande skillander mellan de 2 operativen. Avsnittet om Plotly går att följa oavsett OS. Här använder vi Python som programmeringsspråk (Plotly.py) men om du redan är bekväm med R eller JavaScript finns det stöd för det (se Plotlys officiella dokumentation för att komma vidare).
+
+<h3>Innehållet i korthet:</h3>
+<ul type="circle" style="margin:0; margin-left: 25px; padding:0;">
+<li style="margin-bottom: 0px; padding:0;">1. Vad du behöver</li><li style="margin:0; margin-left: 25px; padding:0; margin-bottom: 0px;">1.1 Dator på vilken du har fullständiga rättigheter</li><li type="circle" style="margin:0; margin-left: 25px; padding:0;">1.2 Kaffe och lite tålamod</li><li type="circle" style="margin:0; margin-left: 25px; padding:0;">1.3 Andra förutsättningar</li><li>2. Installation</li><li style="margin:0; margin-left: 25px; padding:0;">2.2 Python</li><li style="margin:0; margin-left: 25px; padding:0;">2.3 Plotly</li><li style="margin:0; margin-left: 25px; padding:0;">2.4 Andra moduler som behövs</li><li>3. Få till en enkel graf</li><li>4. Skapa animerad grafik</li><li>5. Spara som htmlfil eller bild</li><li>6. Läs mer - länktips</li><li>7. Det allra nödvändigaste om terminalen</li><li>8. Hänvisning för Windowsanvändare</li>
+</ul>
+
+<h4>1.3 Andra förutsättningar</h4>
+Det är en stor fördel, men absolut inget krav att du provat på att jobba i terminalen förut. Allra bäst är det förstås om man rör sig ganska obehindrat i Bash eller motsvarande, förstår filsystemet och har viss allmän kunskap om Unixsystem. Men jag har försökt beskriva stegen så att det ska kunna gå bra även om du aldrig vågat öppna en terminal på din dator - nånsin. Datorn går inte sönder om du stavar fel eller trycker Enter vid fel tillfälle. Iaf inte om du har någorlunda koll på vad du försöker göra. Kopiera aldrig in kod rakt av från internet utan att veta vad det är för något! Det kan dock verkligen ha sönder datorn utom all räddning. 
+
+Just när det gäller att röra sig i filsystemet via terminalen är det mycket praktiskt att ha lite grundläggande kunskaper. Nedan finns det allra mest grundläggande beskrivet. Men jag tycker ändå att vi skippar det just nu, för vi vill ju komma igång! Nästa APT står för dörren och du är förstås otroligt sugen på att kunna visa dina viktiga siffror på snyggast möjliga sätt för hela styrkan asap.
+
+// Hänvisning till rundtur i Bash
+
+<h3>2 Installation</h3>
+<h4>2.1 Installera Python</h4>
+Kolla om du redan har Python
+Om du använder Mac är det mycket troligt att du redan har Python installerat. Öppna en terminal (programmet heter Terminal och finns bland Övrigt) och skriva "python --version" efter $-tecknet. 
+
+1. Python 2.7.x
+2. Python 3.7.x
+
+Om du redan har Python installerat men versionen är 2.7.nånting behöver du uppdatera till Python 3.7 eller högre.
+Om du redan har version 3.7 eller högre behöver du inte göra nånting. 
+
+Uppdatera Python
+- Besök python.org och ladda ner installationsfilen för Python 3
+- Kör den nedladdade filen
+- Kontrollera att det fungerat genom att skriva "python3 --version" i en terminal
+- Klart
+
+Observera att den gamla versionen inte tagits bort. Det gör inget, utan låt det vara så. Versionerna kan samexistera utan problem. Skillnaden är att du hädanefter skriver python3 i terminalen (- beskrivning till hur man slipper det så att man kan skriva bara python och jag menar 3). Skulle man glömma 3:an kommer version 2 att användas. 
+
+<h4>2.2 Installera Plotly</h4>
+För att kunna installera plotly och andra moduler och bibliotek är det praktiskt med en pakethanterare till Python. Den heter pip (paketinstallerare för Python) och laddas ner från https://pypi.org/project/pip/. När du installerat pip kan du installera tillbehör och blingbling till Python hur smidigt som helst =) 
+
+För att det ska bli rätt version behöver du den här gången ange vad det är du vill ha:
+"pip install plotly==4.12.0" (som i skrivande stund är det senaste - detta kan du kontrollera här: https://pypi.org/project/plotly/)
+
+Det var så långt, på så kort tid! Det kanske är dags att fylla på kaffekoppen?! //giffel
+
+<h4>2.3 pandas</h4>
+För att kunna arbeta med en datamängd - data frame på ett effektivt sätt föreslår jag att du redan nu även lägger till biblioteket pandas. Precis som förut m h a pip: "pip install pandas".
+
+Nu är det bara en sak till som vi behöver bestämma oss för innan vi kan börja producera nånting. Vad vill du använda för program för att skriva själva koden? Det här är en het potatis som jag inte kommer föra nåt djupare resonemang kring. Om du orkar gräva i detta infekterade ämne om vilket progam som är bäst är det bara googla loss =) Jag kommer visa exemplen i SublimeText för den har jag fastnat för. Men det spelar absolut ingen roll så länge du trivs med det du använder. Det går alldeles utmärkt att använda Textredigerare som är inbyggd i Mac. Det du behöver tänka på då är att filen behöver skapas utanför programmet. Annars får du inte rätt filformat. Öppna en terminal och skapa en fil vid namn "test.py" (där py förstås står för python) m h a touch såhär: "touch test.py". Man kan se det som att man bara petar lite på filen. Den finns nu, men är tom. Öppna sedan filen med textredigeraren. 
+
+Om du använder ett program som är tänkt att användas för skripting/programmering så sparar du filen direkt som "test.py". 
+
+<h3>3. Få till ett enkelt diagram</h3>
+Låt säga att vi vill visa ett linjediagram över antalet fall av Brucella de senaste 10 åren. Bara som ett exempel-Helge. Vi börjar med att skapa en fil vi kallar "brucella.py". I filen skriver vi:
+
+import pandas as pd
+import plotly
+import plotly.express as px
+
+Här importeras alltså de moduler/bibliotek vi kommer använda. Som du ser kommer vi använda oss av Plotly Express som är en smidig del av Plotly. Det finns även Graph Objects som ger ännu mer möjligheter, men det är lite klurigare så vi börjar med px. 
+
+Nu behöver vi data. Man kan antingen skriva in siffrorna direkt i Pythonfilen eller så kan man importera data från t ex ett Excelblad eller en CSV-fil. Till det här första diagrammet skippar vi det och knackar in siffrorna direkt i filen. 
+
+För att definiera sina data anger man en "data frame" m h a pandas:
+df = pd.DataFrame
+
+Sedan är det dags att fylla på med siffror från min favoritsajt: folkhalsomyndigheten.se =) (länk: https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/brucellos/?t=county)
+Vi gör en kolumn med årtalen ("Year") vi vill använda och en kolumn med antalet fall ("Cases"):
+
+df = pd.DataFrame({"Year":["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019"],
+				"Cases":[12, 11, 13, 10, 16, 13, 19, 15, 11, 14]
+				})
+
+Som du ser finns det en 4-tabbars indragning på rad 2 och 3 (en tabb kan vara olika lång beroende på program osv, men 1 tabb = 4 mellanslag i det här fallet). Denna är viktig! För Python är tomt utrymme inte bara tom plats utan meningsbärande meddelanden. På så sätt håller Python reda på vad som hänger ihop med vartannat och vad som är nåt helt nytt grepp från din sida. Det är också viktigt att det finns lika många värden i båda kolumnerna. Pandas kommer koppla samman dem på det sättet, som rader. För år 2010 (första angivna året) var antalet fall 12. 
+
+//kolla upp tabbarna för det var minsann inte självklart!
+
+Det var datan det. Nu har vi nåt att jobba med.
+
+Nästa steg blir att bygga själva diagrammet. Det gör vi med Plotly såhär:
+
+fig = px.line(df,  x="Year", y="Cases", title="Antal fall av Brucella i Sverige 2010-2019")
+
+Med den raden säger jag att jag:
+1. vill ha en figur ("fig")
+2. den ska göras med Plotly Express ("px")
+3. det ska vara ett linjediagram ("line")
+4. jag vill använda datan jag definierade ovan ("df" - DataFrame)
+5. på x-axeln vill jag ha årtalen
+6. på y-axeln vill jag ha antalet fall
+7. titeln ska vara "..."
+
+Anmärkning: Kolumnen "Year" kan heta vad du vill. Det heter ju år på svenska, men det kan bli trassligt med å, ä och ö just i variabel- och filnamn. Det är inga problem i titeln eller för visningsnamnen till axlarna eller liknande. Så oroa dig inte för att det kommer synas, vi fixar det strax. Vill man kan man ju kalla kolumnen "Aar" eller nåt.
+
+Nu återstår faktiskt bara att visa själva figuren. Det skriver man såhär:
+
+fig.show()
+
+//Visa all kod till denna fil
+
+Spara filen och kör den med Python. Det gör du genom att i terminalen stå i den katalog där .py-filen finns och skriver:
+
+$python3 brucella.py
+
+Vad vi då hoppas på är att det efter några sekunder öppnas en webbläsare på din dator med ditt första linjediagram skapat i Plotly. Känn på glädjen i det =) Som du ser så har Plotly själv justerat skalan på axlarna. Hur fräsigt är inte det? 
+
+Det fina med att du nu är i en webbläsare kan du se överst till höger på sidan. Där kan man zooma in på olika sätt, ladda ner bilden mm. Du kan också peka på olika ställen i ditt diagram för att få veta mer. Det dyker upp en flagga med detaljer. Ganska snyggt ändå! Men vi ska snygga till det lite extra tycker jag ändå. Bakgrunden är lite störande. Det kan aldrig bli _för_ himmelsblått, eller kan det kanske ändå det i vissa sammanhang? ;) 
+
+Bakgrundsfärgen kan styras med följande rad:
+
+fig.layout.plot_bgcolor = "#FAFAFA"
+
+Raden behöver förstås ligga före fig.show() för har vi väl visat bilden är det försent. Färgen kan anges i hex som jag har gjort ovan eller med ord som exempelvis "white".
+
+Skulle det inte också vara trevligt att kunna döpa axlarna till vad man vill? Det gör vi genom att "uppdatera figuren" med våra instruktioner såhär:
+
+fig.update_xaxes(title_text="År")
+fig.update_yaxes(title_text="Antal fall")
+
+De raderna behöver också vara placerade nånstans mellan att vi skapade själva figuren och att vi visar den. Förslagsvis efter raden där vi kirrade bakgrundsfärgen. 
+
+Det många fler saker man kan ändra på och fila på men jag tycker vi stoppar där och går vidare i programmet så att säga.
+
+Spara filen som html och/eller bild.
+
+<h3>4. Animerad grafik</h3>
+Nu äntligen ska det blir Rosling av! 
+
+Vi har faktiskt klarat av det allra svåraste. Den här sista biten att få till bubblor som rör sig kommer gå smidigt. 
+
+Vi tar ett annat exempel. Varför inte tuberkulosincidensen per region i Sverige de senaste 10 åren? Det finns xls-fil att ladda ner från Folkhälsomyndigheten men jag kommer visa hur vi skapar en egen. Statistiken hittar du här: https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/tuberkulos/?t=county
+Öppna ett Excelblad och skapa en kolumn för region, en för år, en för incidens och en för population:
+
+| region | aar | incidens | pop |
+
+Anledningen till att populationen är med är att man på så sätt kan göra bubblor som motsvarar antalet invånare i den regionen. Bubblans storlek blir representativ för invånarantalet. Vilket blir extra snajsigt när vi nu ska visa incidensen! Siffror om folkmängd tillhandahåller SCB här: https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__BE__BE0101__BE0101A/BefolkningNy
+
+Du kan också ladda ner en färdig Excelfil där allt redan är ifyllt för att spara lite tid: //FILEN
+
+Skapa en ny Pythonfil. Den kan t ex få heta "tb_inc.py".
+Det vi behöver göra annorlunda den här gången är alltså att läsa datan från en fil. Det gör man såhär:
+
+df = pd.read_excel("katalogen/min_fil.xlsx")
+
+Sen är det bara gå lös på vad vi vill ha var i diagrammet. Vi skapar ett punktdiagram (EN: scatter plot) och ser till så att punkternas storlek motsvarar invånarantalet - då har vi en bubbla. 
+
+fig = px.scatter(df,  x="aar", y="incidens", title="Incidens av tuberkulos i Sveriges regioner 2010-2019", animation_frame="aar", color="region", range_x=[2010,2019], size="pop")
+
+Det som händer här är att vi:
+1. skapar en figur (fig)
+2. med Plotly Express (px)
+3. som ska vara ett punktdiagram (scatter)
+4. datan tar vi från "df", dvs vår DataFrame
+5. på x-axeln visar vi årtal (x)
+6. på y-axeln visar vi incidensen (y)
+7. titeln på diagrammet "..." (title)
+8. animera i förhållande till årtal (animation_frame)
+9. grupper i färger utifrån region (color)
+10. omfånget för årtalen ska vara 2010-2019 (range_x) //om man inte gör det här kommer det blir…
+11. storleken på punkten ska bli en boll som står i proportion till antalet invånare i respektive region (pop)
+
+Nu återstår bara de sista 2 raderna för att snygga upp lite och faktiskt visa figuren. Precis som förut:
+
+fig.layout.plot_bgcolor = "#FFFFFF"
+fig.show()
+
+Allt som allt ser koden nu ut såhär:
+//Visa hela koden till tb_inc.py
+
+Spara filen och kör den på samma sätt som förut:
+
+$python3 tb_inc.py
+
+Rör det sig? Fantastiskt! 
+
+<h3>6. Läs mer - länktips</h3>
+Om det uppstår problem - felmeddelanden
+Googla sista raden i felmeddelandet, copy-paste:a //kolla så jag tänker rätt nu
+//Exempel
+
+Hjälp med Python
+
+Hjälp med Plotly
+
+Fler möjligheter - Plotlys dokumentation
+
+<h3>7. Det allra nödvändigaste om terminalen</h3>
+
+<h3>8. Instruktioner för Windowsanvändare</h3>
+
+201108
+Vill du göra succé på nästa APT genom att smälla upp en presentation i Hans Rosling-klass?
+
+<center><iframe src="https://giphy.com/embed/GrBBdaccaEDoInWBmI" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></center>
+
+<i>"Show - don't tell"</i> brukar man ju säga. Jag ska visa vad man kan göra.
+
+<center><iframe src="https://giphy.com/embed/4sEd58eaRwM1qtkOWb" width="480" height="260" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></center>
+
+Instruktionerna är i första hand skrivna för Mac-användare men det kommer finnas hänvisningar till Windowsanvändare vid de tillfällen där tillvägagångssätten går isär. Här använder vi Python som programmeringsspråk (Plotly.py) men om du redan är bekväm med R eller JavaScript finns det stöd för det (se Plotlys officiella dokumentation för att komma vidare).
+
+<h3>Innehållet i korthet:</h3><ul type="circle" style="margin:0; margin-left: 25px; padding:0;">
+<li style="margin-bottom: 0px; padding:0;">1. Vad du behöver</li><li style="margin:0; margin-left: 25px; padding:0; margin-bottom: 0px;">1.1 Dator på vilken du har fullständiga rättigheter</li><li type="circle" style="margin:0; margin-left: 25px; padding:0;">1.2 Kaffe och lite tålamod</li><li type="circle" style="margin:0; margin-left: 25px; padding:0;">1.3 Andra förutsättningar</li><li>2. Installation</li><li style="margin:0; margin-left: 25px; padding:0;">2.1 Python</li><li style="margin:0; margin-left: 25px; padding:0;">2.2 Plotly</li><li style="margin:0; margin-left: 25px; padding:0;">2.3 Andra moduler som behövs</li><li>3. Få till en enkel graf</li><li>4. Skapa animerad grafik</li><li>5. Läs mer - länktips</li><li>6. Det allra nödvändigaste om terminalen</li><li>7. Instruktioner/hänvisningar för Windowsanvändare</li></ul>
+
+<h4>1.3 Andra förutsättningar</h4>Det är en stor fördel, men absolut inget krav att du provat på att jobba i terminalen förut. Allra bäst är det förstås om man rör sig ganska obehindrat i Bash eller motsvarande, förstår filsystemet och har viss allmän kunskap om Unixsystem. Men jag har försökt beskriva stegen så att det ska kunna gå bra även om du aldrig vågat öppna en terminal på din dator - nånsin. Datorn går inte sönder om du stavar fel eller trycker Enter vid fel tillfälle. Iaf inte om du har någorlunda koll på vad du försöker göra. Kopiera aldrig in kod rakt av från internet utan att veta vad det är för något! Det kan dock verkligen ha sönder datorn utom all räddning. 
+
+Just när det gäller att röra sig i filsystemet via terminalen är det mycket praktiskt att ha lite grundläggande kunskaper. Nedan finns det allra mest grundläggande beskrivet. Men jag tycker ändå att vi skippar det just nu, för vi vill ju komma igång! Nästa APT står för dörren och du är förstås otroligt sugen på att kunna visa dina viktiga siffror på snyggast möjliga sätt för hela styrkan asap.
+
+// Hänvisning till rundtur i Bash
+
+<h3>2. Installation</h3><h4>2.1 Installera Python</h4>Kolla om du redan har Python:
+Om du använder Mac är det mycket troligt att du redan har Python installerat. Öppna en terminal (programmet heter Terminal och finns bland Övrigt) och skriva <font face="Courier New">python --version</font> efter $-tecknet. 
+
+1. Python 2.7.x
+2. Python 3.7.x
+
+Om du redan har Python installerat men versionen är 2.7.nånting behöver du uppdatera till Python 3.7 eller högre.
+Om du redan har version 3.7 eller högre behöver du inte göra nånting. 
+
+Uppdatera Python:
+- Besök python.org och ladda ner installationsfilen för Python 3
+- Kör den nedladdade filen
+- Kontrollera att det fungerat genom att skriva <font face="Courier New">python3 --version</font> i en terminal
+- Klart
+
+Observera att den gamla versionen inte tagits bort. Det gör inget, utan låt det vara så. Versionerna kan samexistera utan problem. Skillnaden är att du hädanefter skriver python3 i terminalen (- beskrivning till hur man slipper det så att man kan skriva bara python och jag menar 3). Skulle man glömma 3:an kommer version 2 att användas. 
+
+<h4>2.2 Installera Plotly</h4>För att kunna installera plotly och andra moduler och bibliotek är det praktiskt med en pakethanterare till Python. Den heter pip (paketinstallerare för Python) och laddas ner från https://pypi.org/project/pip/. När du installerat pip kan du installera tillbehör och blingbling till Python hur smidigt som helst =) 
+
+För att det ska bli rätt version behöver du den här gången ange vad det är du vill ha:
+<font face="Courier New">pip install plotly==4.12.0</font> (som i skrivande stund är det senaste - detta kan du kontrollera här: https://pypi.org/project/plotly/)
+
+Det var så långt, på så kort tid! Det kanske är dags att fylla på kaffekoppen?! //giffel
+
+<h4>2.3 Pandas</h4>För att kunna arbeta med en datamängd - data frame på ett effektivt sätt föreslår jag att du redan nu även lägger till biblioteket pandas. Precis som förut m h a pip: <font face="Courier New">pip install pandas</font>.
+
+Nu är det bara en sak till som vi behöver bestämma oss för innan vi kan börja producera nånting. Vad vill du använda för program för att skriva själva koden? Det här är en het potatis som jag inte kommer föra nåt djupare resonemang kring. Om du orkar gräva i detta infekterade ämne om vilket progam som är bäst är det bara googla loss =) Jag kommer visa exemplen i SublimeText för den har jag fastnat för. Men det spelar absolut ingen roll så länge du trivs med det du använder. Det går alldeles utmärkt att använda Textredigerare som är inbyggd i Mac. Det du behöver tänka på då är att filen behöver skapas utanför programmet. Annars får du inte rätt filformat. Öppna en terminal och skapa en fil vid namn "test.py" (där py förstås står för python) m h a touch såhär: <font face="Courier New">touch test.py</font>. Man kan se det som att man bara petar lite på filen. Den finns nu, men är tom. Öppna sedan filen med textredigeraren. 
+
+Om du använder ett program som är tänkt att användas för skripting/programmering så sparar du filen direkt som "test.py". 
+
+<h3>3. Få till ett enkelt diagram</h3>Låt säga att vi vill visa ett linjediagram över antalet fall av Brucella de senaste 10 åren. Bara som ett exempel-Helge. Vi börjar med att skapa en fil vi kallar "brucella.py". I filen skriver vi:
+<font face="Courier New">
+import pandas as pd
+import plotly
+import plotly.express as px
+</font>
+Här importeras alltså de moduler/bibliotek vi kommer använda. Som du ser kommer vi använda oss av Plotly Express som är en smidig del av Plotly. Det finns även Graph Objects som ger ännu mer möjligheter, men det är lite klurigare så vi börjar med px. 
+
+Nu behöver vi data. Man kan antingen skriva in siffrorna direkt i Pythonfilen eller så kan man importera data från t ex ett Excelblad eller en CSV-fil. Till det här första diagrammet skippar vi det och knackar in siffrorna direkt i filen. 
+
+För att definiera sina data anger man en "data frame" m h a pandas:
+<font face="Courier New">df = pd.DataFrame</font>
+
+Sedan är det dags att fylla på med siffror från min favoritsajt: folkhalsomyndigheten.se =) (länk: https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/brucellos/?t=county)
+Vi gör en kolumn med årtalen ("Year") vi vill använda och en kolumn med antalet fall ("Cases"):
+
+<font face="Courier New">df = pd.DataFrame({"Year":["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019"],
+				"Cases":[12, 11, 13, 10, 16, 13, 19, 15, 11, 14]
+				})</font>
+
+Som du ser finns det en 4-tabbars indragning på rad 2 och 3 (en tabb kan vara olika lång beroende på program osv, men 1 tabb = 4 mellanslag i det här fallet). Denna är viktig! För Python är tomt utrymme inte bara tom plats utan meningsbärande meddelanden. På så sätt håller Python reda på vad som hänger ihop med vartannat och vad som är nåt helt nytt grepp från din sida. Det är också viktigt att det finns lika många värden i båda kolumnerna. Pandas kommer koppla samman dem på det sättet, som rader. För år 2010 (första angivna året) var antalet fall 12. 
+
+//kolla upp tabbarna för det var minsann inte självklart!
+
+Det var datan det. Nu har vi nåt att jobba med.
+
+Nästa steg blir att bygga själva diagrammet. Det gör vi med Plotly såhär:
+
+<font face="Courier New">fig = px.line(df,  x="Year", y="Cases", title="Antal fall av Brucella i Sverige 2010-2019")</font>
+
+Med den raden säger jag att jag:
+1. vill ha en figur ("fig")
+2. den ska göras med Plotly Express ("px")
+3. det ska vara ett linjediagram ("line")
+4. jag vill använda datan jag definierade ovan ("df" - DataFrame)
+5. på x-axeln vill jag ha årtalen
+6. på y-axeln vill jag ha antalet fall
+7. titeln ska vara "..."
+
+Anmärkning: Kolumnen "Year" kan heta vad du vill. Det heter ju år på svenska, men det kan bli trassligt med å, ä och ö just i variabel- och filnamn. Det är inga problem i titeln eller för visningsnamnen till axlarna eller liknande. Så oroa dig inte för att det kommer synas, vi fixar det strax. Vill man kan man ju kalla kolumnen "Aar" eller nåt.
+
+Nu återstår faktiskt bara att visa själva figuren. Det skriver man såhär:
+
+<font face="Courier New">fig.show()</font>
+
+//Visa all kod till denna fil
+
+Spara filen och kör den med Python. Det gör du genom att i terminalen stå i den katalog där .py-filen finns och skriver:
+
+<font face="Courier New">$python3 brucella.py</font>
+
+Vad vi då hoppas på är att det efter några sekunder öppnas en webbläsare på din dator med ditt första linjediagram skapat i Plotly. Känn på glädjen i det =) Som du ser så har Plotly själv justerat skalan på axlarna. Hur fräsigt är inte det? 
+
+Det fina med att du nu är i en webbläsare kan du se överst till höger på sidan. Där kan man zooma in på olika sätt, ladda ner bilden mm. Du kan också peka på olika ställen i ditt diagram för att få veta mer. Det dyker upp en flagga med detaljer. Ganska snyggt ändå! Men vi ska snygga till det lite extra tycker jag ändå. Bakgrunden är lite störande. Det kan aldrig bli _för_ himmelsblått, eller kan det kanske ändå det i vissa sammanhang? ;) 
+
+Bakgrundsfärgen kan styras med följande rad:
+
+<font face="Courier New">fig.layout.plot_bgcolor = "#FAFAFA"</font>
+
+Raden behöver förstås ligga före fig.show() för har vi väl visat bilden är det försent. Färgen kan anges i hex som jag har gjort ovan eller med ord som exempelvis "white".
+
+Skulle det inte också vara trevligt att kunna döpa axlarna till vad man vill? Det gör vi genom att "uppdatera figuren" med våra instruktioner såhär:
+<font face="Courier New">
+fig.update_xaxes(title_text="År")
+fig.update_yaxes(title_text="Antal fall")
+</font>
+De raderna behöver också vara placerade nånstans mellan att vi skapade själva figuren och att vi visar den. Förslagsvis efter raden där vi kirrade bakgrundsfärgen. 
+
+Det många fler saker man kan ändra på och fila på men jag tycker vi stoppar där och går vidare i programmet så att säga.
+
+Spara filen som html och/eller bild.
+
+<h3>4. Animerad grafik</h3>Nu äntligen ska det blir Rosling av! 
+
+Vi har faktiskt klarat av det allra svåraste. Den här sista biten att få till bubblor som rör sig kommer gå smidigt. 
+
+Vi tar ett annat exempel. Varför inte tuberkulosincidensen per region i Sverige de senaste 10 åren? Det finns xls-fil att ladda ner från Folkhälsomyndigheten men jag kommer visa hur vi skapar en egen. Statistiken hittar du här: https://www.folkhalsomyndigheten.se/folkhalsorapportering-statistik/statistik-a-o/sjukdomsstatistik/tuberkulos/?t=county
+Öppna ett Excelblad och skapa en kolumn för region, en för år, en för incidens och en för population:
+
+| region | aar | incidens | pop |
+
+Anledningen till att populationen är med är att man på så sätt kan göra bubblor som motsvarar antalet invånare i den regionen. Bubblans storlek blir representativ för invånarantalet. Vilket blir extra snajsigt när vi nu ska visa incidensen! Siffror om folkmängd tillhandahåller SCB här: https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__BE__BE0101__BE0101A/BefolkningNy
+
+Du kan också ladda ner en färdig Excelfil där allt redan är ifyllt för att spara lite tid: //FILEN
+
+Skapa en ny Pythonfil. Den kan t ex få heta "tb_inc.py".
+Det vi behöver göra annorlunda den här gången är alltså att läsa datan från en fil. Det gör man såhär:
+
+<font face="Courier New">df = pd.read_excel("katalogen/TB_bubbles.xlsx")</font>
+
+Sen är det bara gå lös på vad vi vill ha var i diagrammet. Vi skapar ett punktdiagram (EN: scatter plot) och ser till så att punkternas storlek motsvarar invånarantalet - då har vi en bubbla. 
+
+<font face="Courier New">fig = px.scatter(df,  x="aar", y="incidens", title="Incidens av tuberkulos i Sveriges regioner 2010-2019", animation_frame="aar", color="region", range_x=[2010,2019], size="pop")</font>
+
+Det som händer här är att vi:
+1. skapar en figur (fig)
+2. med Plotly Express (px)
+3. som ska vara ett punktdiagram (scatter)
+4. datan tar vi från "df", dvs vår DataFrame
+5. på x-axeln visar vi årtal (x)
+6. på y-axeln visar vi incidensen (y)
+7. titeln på diagrammet "..." (title)
+8. animera i förhållande till årtal (animation_frame)
+9. grupper i färger utifrån region (color)
+10. omfånget för årtalen ska vara 2010-2019 (range_x) //om man inte gör det här kommer det blir…
+11. storleken på punkten ska bli en boll som står i proportion till antalet invånare i respektive region (pop)
+
+Nu återstår bara de sista 2 raderna för att snygga upp lite och faktiskt visa figuren. Precis som förut:
+<font face="Courier New">
+fig.layout.plot_bgcolor = "#FFFFFF"
+fig.show()
+</font>
+Allt som allt ser koden nu ut såhär:
+//Visa hela koden till tb_inc.py
+
+Spara filen och kör den på samma sätt som förut:
+
+<font face="Courier New">$python3 tb_inc.py</font>
+
+Rör det sig? Fantastiskt! 
+
+<h3>5. Läs mer - länktips</h3>Om det uppstår problem - felmeddelanden
+Googla sista raden i felmeddelandet, copy-paste:a //kolla så jag tänker rätt nu
+//Exempel
+Hjälp med Python
+Hjälp med Plotly
+Fler möjligheter - Plotlys dokumentation
+
+<h3>6. Det allra nödvändigaste om terminalen</h3>
+<h3>7. Instruktioner för Windowsanvändare</h3>
