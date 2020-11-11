@@ -1,0 +1,66 @@
+<h3>En introduktion till "terminalen" för Plotly-entusiasten</h3>
+<h4>Vad är terminalen?</h4>
+Fönstret som man brukar kalla kommandoprompten eller CLI på engelska (command line interface) är en textbaserad applikation för att se, hantera och ändra filer på datorn. Det liknar på sätt och vis Finder i Mac, men utan det grafiska gränssnittet. På Mac heter programmet Terminal och finns under Övrigt.
+<h4>Prompten</h4>
+När du öppnat programmet bör du se ett vitt eller svart fönster som väntar på dina kommandon.
+
+Troligen ser det ut ungefär såhär:
+Din-MacBook-Air:~ dittanvändarnamn$
+Du skriver dina kommandon efter dollartecknet $.
+
+<h4>Ett första kommando</h4>
+Prova skriva "whoami" och avsluta med Enter:
+
+    $ whoami
+    dittanvändarnamn
+    
+<h4>Praktiska kommandon att känna till</h4>
+<h5>Var är jag?</h5>
+Om man gått vilse i filstrukturen är det praktiskt att kunna fråga prompten om vägledning. Det gör man med kommandot "pwd" (print working directory): 
+
+    $ pwd
+Resultatet blir kanske något i stil med /Users/dittanvändarnamn men beror ju såklart helt på var du befann dig när du skrev kommandot. 
+    
+<h5>Ta reda på mer om ett kommando</h5>
+De flesta kommandon har en hjälp-sida. För att få upp den i terminalen skriver du "man kommando", t ex $man pwd. Man-sidorna visas en sida i taget och du tar dig vidare med mellanslagstangenten. För att ta dig ur hjälp-sidan och återgå till kommandoprompten trycker du på "q" för quit. 
+
+<h5>Lista filer och kataloger</h5>
+Visa vad som finns i katalogen jag står i gör man med kommandot "ls" (litet L). Prova! 
+
+    $ ls
+    Applications
+    Desktop
+    Downloads
+    Music
+    ... 
+
+<h5>Byta katalog</h5>
+Om detta var resultatet när du skrev "pwd": /Users/dittanvändarnamn kan du nu prova att byta katalog till skrivbordet - Desktop. 
+
+    $ cd Desktop 
+
+Det kan vara så att det heter Skrivbord på din dator, men det såg du i så fall när du skrev "ls".
+Nu kan du prova både "ls" och "pwd" igen. 
+
+Vill man gå tillbaka uppåt i filsystemet igen skriver man: 
+
+$cd ..
+
+Detta är oerhört användbart för att flytta sig hit och dit!
+
+<h5>Skapa en katalog</h5>
+För att skapa en katalog använder du kommandot "mkdir" följt av vad du vill att katalogen ska heta. 
+
+    $ mkdir min_katalog 
+
+Titta på resultatet mha "ls".
+
+<h5>Ta bort filer och kataloger</h5>
+För att ta bort kataloger och filer används kommandot rm (remove). Det är viktigt att alltid tänka på att detta är helt oåterkalleligt i terminalen. Det finns ingen papperskorg - swoosh bort bara! Tänk alltid ett extra varv innan du använder "rm".
+
+Ska man ta bort en katalog behöver man lägga till "-r".
+
+$rm -r min_katalog
+$ls
+
+Det var allt för den här mycket mycket korta introduktionen till terminalen. Med lite träning märker du förhoppningsvis hur praktiskt det här är. Ibland är det faktiskt enda alternativet så det är bra att kunna det mest basala. 
